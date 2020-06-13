@@ -1,0 +1,46 @@
+Description: Create a full environment
+Parameters:
+    EnvironmentName:
+        Type: String
+        Description: An environment name to be prefixed to resources
+    S3Bucket:
+        Type: String
+        Description: The S3 Bucket name that contains the CloudFormation template files
+    VPCCIDR:
+        Type: String
+        Default: 10.10.0.0/16
+        Description: The IP range (CIDR notation) for the VPC
+    VPCPublicSubnet1CIDR:
+        Type: String
+        Default: 10.10.10.0/24
+        Description: The IP range for the first public subnet
+    VPCPublicSubnet2CIDR:
+        Type: String
+        Default: 10.10.11.0/24
+        Description: The IP range for the second public subnet
+    VPCPrivateSubnet1CIDR:
+        Type: String
+        Default: 10.10.20.0/24
+        Description: The IP range for the first private subnet
+    VPCPrivateSubnet2CIDR:
+        Type: String
+        Default: 10.10.21.0/24
+        Description: The IP range for the second private subnet
+Resources:
+    VPC:
+        Type: 'AWS::CloudFormation::Stack'
+        Properties:
+            TemplateURL: !Sub 'https://s3.amazonaws.com/${S3Bucket}/templates/vpc.yaml'
+            Parameters:
+                EnvironmentName: !Ref AWS::StackName
+                VpcCIDR: !Ref VPCCIDR
+                PublicSubnet1CIDR: !Ref VPCPublicSubnet1CIDR
+                PublicSubnet2CIDR: !Ref VPCPublicSubnet2CIDR
+                PrivateSubnet1CIDR: !Ref VPCPrivateSubnet1CIDR
+                PrivateSubnet2CIDR: !Ref VPCPrivateSubnet2CIDR
+Outputs:
+    VPC:
+        Description: VPC
+        Value: !GetAtt
+            - VPC
+            - Outputs.VPC

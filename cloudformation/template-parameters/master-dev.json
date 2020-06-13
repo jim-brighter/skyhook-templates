@@ -1,0 +1,30 @@
+[
+    {
+        "ParameterKey": "EnvironmentName",
+        "ParameterValue": "dev"
+    },
+    {
+        "ParameterKey": "S3Bucket",
+        "ParameterValue": "%BUCKET_NAME%"
+    },
+    {
+        "ParameterKey": "VPCCIDR",
+        "ParameterValue": "10.10.0.0/16"
+    },
+    {
+        "ParameterKey": "VPCPublicSubnet1CIDR",
+        "ParameterValue": "10.10.10.0/24"
+    },
+    {
+        "ParameterKey": "VPCPublicSubnet2CIDR",
+        "ParameterValue": "10.10.11.0/24"
+    },
+    {
+        "ParameterKey": "VPCPrivateSubnet1CIDR",
+        "ParameterValue": "10.10.20.0/24"
+    },
+    {
+        "ParameterKey": "VPCPrivateSubnet2CIDR",
+        "ParameterValue": "10.10.21.0/24"
+    }
+]
